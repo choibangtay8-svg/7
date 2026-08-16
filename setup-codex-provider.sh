@@ -26,6 +26,14 @@ WIRE_API=${WIRE_API:-responses}
 read -rp "Reasoning effort (low/medium/high/max/ultra) [medium]: " REASONING_EFFORT
 REASONING_EFFORT=${REASONING_EFFORT:-medium}
 
+case "$REASONING_EFFORT" in
+    low|medium|high|max|ultra)
+        ;;
+    *)
+        echo "Invalid reasoning effort, using medium"
+        REASONING_EFFORT="medium"
+        ;;
+esac
 
 echo
 read -rsp "Nhập API key mới: " API_KEY
