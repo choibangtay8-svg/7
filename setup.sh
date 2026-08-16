@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
+
+# Fix curl | bash interactive input
+if [ ! -t 0 ]; then
+    exec </dev/tty
+fi
+
 clear
 
 set -e
-
-# Restore terminal state on exit
-trap 'stty sane 2>/dev/null || true' EXIT
-
-stty sane 2>/dev/null || true
 
 # Cleanup biến cũ trong session hiện tại
 for var in PROVIDER_ID PROVIDER_NAME MODEL_ID BASE_URL KEY_ENV WIRE_API REASONING_EFFORT API_KEY; do
