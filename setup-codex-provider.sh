@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
+clear
+
 set -e
 
 mkdir -p ~/.codex
 
-read -rp "Provider ID (ví dụ: patway): " PROVIDER_ID
-PROVIDER_ID=${PROVIDER_ID:-pateway}
+read -rp "Provider ID (ví dụ: porn): " PROVIDER_ID
+PROVIDER_ID=${PROVIDER_ID:-porn}
 
-read -rp "Provider name (ví dụ: Pateway): " PROVIDER_NAME
-PROVIDER_NAME=${PROVIDER_NAME:-Pateway}
+read -rp "Provider name (ví dụ: Porn): " PROVIDER_NAME
+PROVIDER_NAME=${PROVIDER_NAME:-Porn}
 
 read -rp "Model ID (ví dụ: gpt-5.6-luna): " MODEL_ID
 MODEL_ID=${MODEL_ID:-gpt-5.6-luna}
 
 read -rp "Base URL: " BASE_URL
-BASE_URL=${BASE_URL:-https://api.pateway.ai/v1}
+BASE_URL=${BASE_URL:-https://api.pornhub.com/v1}
 
 read -rp "API key env name (ví dụ: PATEWAY_API_KEY): " KEY_ENV
-KEY_ENV=${KEY_ENV:-PATEWAY_API_KEY}
+KEY_ENV=${KEY_ENV:-PORN_API_KEY}
 
 read -rp "Wire API (responses/chat_completions): " WIRE_API
 WIRE_API=${WIRE_API:-responses}
