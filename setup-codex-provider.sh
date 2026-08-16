@@ -3,6 +3,10 @@ clear
 
 set -e
 
+# Force interactive input from terminal
+exec </dev/tty
+stty sane 2>/dev/null || true
+
 # Cleanup biến cũ trong session hiện tại
 for var in PROVIDER_ID PROVIDER_NAME MODEL_ID BASE_URL KEY_ENV WIRE_API REASONING_EFFORT API_KEY; do
     unset "$var" || true
@@ -34,7 +38,30 @@ REASONING_EFFORT=${REASONING_EFFORT:-medium}
 
 
 echo
-read -rsp "Nhập API key mới: " API_KEY
+
+# Nhập API key có mask *
+printf "Nhập API key mới: "
+
+API_KEY=""
+
+while IFS= read -r -s -n1 char; do
+    case "$char" in
+        $'\n')
+            break
+            ;;
+        $'\177')
+            if [ -n "$API_KEY" ]; then
+                API_KEY="${API_KEY%?}"
+                printf "\b \b"
+            fi
+            ;;
+        *)
+            API_KEY+="$char"
+            printf "*"
+            ;;
+    esac
+done
+
 echo
 
 
@@ -86,3 +113,6 @@ echo "URL      : $BASE_URL"
 echo "Effort   : $REASONING_EFFORT"
 echo "Config   : ~/.codex/config.toml"
 echo "================================="
+
+# Restore terminal state
+stty sane 2>/dev/null || true
