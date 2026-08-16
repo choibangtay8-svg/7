@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Fix curl | bash interactive input
-if [ ! -t 0 ]; then
-    exec </dev/tty
-fi
-
 clear
 
 set -e
