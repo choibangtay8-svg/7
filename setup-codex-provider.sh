@@ -3,8 +3,9 @@ clear
 
 set -e
 
-# Force interactive input from terminal
-exec </dev/tty
+# Restore terminal state on exit
+trap 'stty sane 2>/dev/null || true' EXIT
+
 stty sane 2>/dev/null || true
 
 # Cleanup biến cũ trong session hiện tại
@@ -92,6 +93,3 @@ echo "URL      : $BASE_URL"
 echo "Effort   : $REASONING_EFFORT"
 echo "Config   : ~/.codex/config.toml"
 echo "================================="
-
-# Restore terminal state
-stty sane 2>/dev/null || true
