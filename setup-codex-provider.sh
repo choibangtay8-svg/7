@@ -39,29 +39,8 @@ REASONING_EFFORT=${REASONING_EFFORT:-medium}
 
 echo
 
-# Nhập API key có mask *
-printf "Nhập API key mới: "
-
-API_KEY=""
-
-while IFS= read -r -s -n1 char; do
-    case "$char" in
-        $'\n')
-            break
-            ;;
-        $'\177')
-            if [ -n "$API_KEY" ]; then
-                API_KEY="${API_KEY%?}"
-                printf "\b \b"
-            fi
-            ;;
-        *)
-            API_KEY+="$char"
-            printf "*"
-            ;;
-    esac
-done
-
+# API key (ẩn input)
+read -rsp "Nhập API key mới: " API_KEY
 echo
 
 
